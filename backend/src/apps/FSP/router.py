@@ -1,6 +1,4 @@
 from fastapi import APIRouter, Depends
-from fastapi.responses import JSONResponse
-import sqlalchemy as sa
 from typing import Annotated
 
 
@@ -19,6 +17,7 @@ async def get_distance(
         FindDistanceService, Depends(find_distance_service)
     ],
 ) -> FSPResponseSchema:
+    
     result = await find_distance_service.get_smillest_distance(
         started_city, target_city
     )

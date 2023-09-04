@@ -1,6 +1,8 @@
 import asyncio
 import math
 
+from fastapi import HTTPException
+
 from src.apps.utils import AbstractRepository
 from src.apps.FSP.schemas import CitySchema, RoadSchema
 
@@ -49,7 +51,16 @@ class FindDistanceService(CityService, RoadService):
             elif road.next_city == current:
                 yield {"city": road.previous_city, "distance": road.distance}
 
+    def validation_city(self, start_city, end_city):
+        name_cities = set()
+        [name_cities.add(city.name) for city in self.cities]
+
+        if start_city not in name_cities or end_city not in name_cities:
+            raise HTTPException(404, "start city or end city not found in")
+
+
     async def get_smillest_distance(self, start_city: str, end_city: str) -> int:
+        self.validation_city(start_city, end_city)
         current = 0
         lenght_roads = {}
         end_id = 0
