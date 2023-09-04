@@ -7,7 +7,7 @@ from src.settings.db import Base
 
 class City(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(unique=True)
+    name: Mapped[str] = mapped_column(sa.String(200), unique=True)
 
     def to_read_model(self) -> CitySchema:
         return CitySchema(id=self.id, name=self.name)
