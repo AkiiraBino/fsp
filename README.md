@@ -1,19 +1,26 @@
-Запуск make dev (различий между prod и dev нет)
+# Running the Application
 
-URL http://127.0.0.1:8080/api/v1/docs
+This section provides instructions for running the FastAPI application in different modes.
 
-Роутер get distance 
-Принимает на вход название старотового города и города назначения
-Вывод формата:
-{
-  "city": "string",
-  "result": {
-    "target_city": "string",
-    "distance": 0
-  }
-}
+## Development Mode
 
-Роутеры get all city/get all road предназначены для просмотра всех данных в БД
+To run the application in development mode, you have two options:
+
+### Option 1: Using Docker Compose
+
+You can use Docker Compose to set up and run the application along with its dependencies.
+
+docker-compose -f docker-compose.dev.yaml up --build
+
+docker-compose -f docker-compose.prod.yaml up --build
+
+### Option 2: Using Makefile
+
+Alternatively, you can use the Makefile for a simplified command:
+
+make dev
+
+make prod
 
 # FastAPI API Documentation
 
