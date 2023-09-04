@@ -24,8 +24,6 @@ async def get_async_session() -> AsyncSession:
 
 
 class DeclarativeBaseOverload:
-
-
     @declared_attr
     def __tablename__(self):
         folder_name = self.__module__.split(".")[-2]

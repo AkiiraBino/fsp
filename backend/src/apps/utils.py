@@ -5,11 +5,12 @@ from sqlalchemy import select
 from src.settings.db import async_session_maker
 from src.apps.models import *
 
+
 class AbstractRepository(ABC):
     @abstractmethod
     async def get_all():
         raise NotImplementedError
-    
+
 
 class SQLAlchemyRepository(AbstractRepository):
     model = None

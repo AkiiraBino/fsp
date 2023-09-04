@@ -10,10 +10,7 @@ class City(Base):
     name: Mapped[str] = mapped_column(unique=True)
 
     def to_read_model(self):
-        return CitySchema(
-            id=self.id,
-            name=self.name
-        )
+        return CitySchema(id=self.id, name=self.name)
 
 
 class Road(Base):
@@ -26,11 +23,10 @@ class Road(Base):
         sa.UniqueConstraint("previous_city", "next_city", name="uix_road"),
     )
 
-
     def to_read_model(self):
         return RoadSchema(
             id=self.id,
             previous_city=self.previous_city,
             next_city=self.next_city,
-            distance=self.distance
+            distance=self.distance,
         )

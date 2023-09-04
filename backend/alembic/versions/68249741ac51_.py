@@ -8,24 +8,24 @@ Create Date: 2023-09-03 23:02:19.712849
 from alembic import op
 import sqlalchemy as sa
 
-#migration city into table FSP_city
+# migration city into table FSP_city
 
 data = [
-"'Renton'",
-"'SoDo'",
-"'Factoria'",
-"'Issaquah'",
-"'Seattle'",
-"'Bellevue'",
-"'Redmond'",
-"'Eastlake'",
-"'Northup'",
+    "'Renton'",
+    "'SoDo'",
+    "'Factoria'",
+    "'Issaquah'",
+    "'Seattle'",
+    "'Bellevue'",
+    "'Redmond'",
+    "'Eastlake'",
+    "'Northup'",
 ]
 
 
 # revision identifiers, used by Alembic.
-revision = '68249741ac51'
-down_revision = '3449c4fc92fa'
+revision = "68249741ac51"
+down_revision = "3449c4fc92fa"
 branch_labels = None
 depends_on = None
 

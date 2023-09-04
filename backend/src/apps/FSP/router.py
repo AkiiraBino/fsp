@@ -1,26 +1,35 @@
-from fastapi import APIRouter,  Depends
+from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 import sqlalchemy as sa
 from typing import Annotated
 
 
-from .schemas import FSPResponseSchema, CitySchema, RoadSchema
+from .schemas import FSPResponseSchema,  CitySchema, RoadSchema
 from .services import *
 from .dependencies import *
 
 router = APIRouter(prefix="/cities", tags=["cities"])
 
 
-
 @router.get("/")
 async def get_distance(
     started_city: str,
     target_city: str,
-    find_distance_service: Annotated[FindDistanceService, Depends(find_distance_service)]
-):
-    result = await find_distance_service.get_smillest_distance(started_city, target_city)
-    pass
-    
+    find_distance_service: Annotated[
+        FindDistanceService, Depends(find_distance_service)
+    ],
+) -> FSPResponseSchema:
+    result = await find_distance_service.get_smillest_distance(
+        started_city, target_city
+    )
+    return {
+        "city": started_city,
+        "result": {
+            "distance": result,
+            "target_city": target_city
+        }
+    }
+
 
 @router.get("/city")
 async def get_all_city(

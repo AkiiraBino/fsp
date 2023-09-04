@@ -20,6 +20,6 @@ class FSPResponseSchema(BaseModel):
     class DistanceResultSchema(BaseModel):
         target_city: str
         distance: int
-        
+
     city: str
     result: DistanceResultSchema

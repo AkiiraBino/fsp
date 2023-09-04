@@ -8,7 +8,7 @@ Create Date: 2023-09-03 23:29:09.162626
 from alembic import op
 import sqlalchemy as sa
 
-data=[
+data = [
     {"city_1": "'Renton'", "city_2": "'SoDo'", "distance": 12},
     {"city_1": "'Renton'", "city_2": "'Factoria'", "distance": 8},
     {"city_1": "'Renton'", "city_2": "'Issaquah'", "distance": 12},
@@ -26,8 +26,8 @@ data=[
 ]
 
 # revision identifiers, used by Alembic.
-revision = '8cdf3cc9b969'
-down_revision = '68249741ac51'
+revision = "8cdf3cc9b969"
+down_revision = "68249741ac51"
 branch_labels = None
 depends_on = None
 
@@ -35,12 +35,16 @@ depends_on = None
 def upgrade() -> None:
     for i in data:
         conn = op.get_bind()
-        previous_city = conn.execute(sa.text(f"SELECT id FROM \"FSP_city\" WHERE name={i['city_1']}"))
-        previous_city  = previous_city.fetchall()[0][0]
-        next_city = conn.execute(sa.text(f"SELECT id FROM \"FSP_city\" WHERE name={i['city_2']}"))
+        previous_city = conn.execute(
+            sa.text(f"SELECT id FROM \"FSP_city\" WHERE name={i['city_1']}")
+        )
+        previous_city = previous_city.fetchall()[0][0]
+        next_city = conn.execute(
+            sa.text(f"SELECT id FROM \"FSP_city\" WHERE name={i['city_2']}")
+        )
         next_city = next_city.fetchall()[0][0]
         op.execute(
-            f'''
+            f"""
                 INSERT INTO "FSP_road" 
                 (previous_city, next_city, distance) 
                 VALUES (
@@ -48,7 +52,7 @@ def upgrade() -> None:
                     {next_city},
                     {i["distance"]}
                     );
-            '''
+            """
         )
     pass
 
