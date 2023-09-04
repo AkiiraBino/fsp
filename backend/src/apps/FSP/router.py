@@ -4,7 +4,7 @@ import sqlalchemy as sa
 from typing import Annotated
 
 
-from .schemas import FSPResponseSchema,  CitySchema, RoadSchema
+from .schemas import FSPResponseSchema, CitySchema, RoadSchema
 from .services import *
 from .dependencies import *
 
@@ -24,10 +24,7 @@ async def get_distance(
     )
     return {
         "city": started_city,
-        "result": {
-            "distance": result,
-            "target_city": target_city
-        }
+        "result": {"distance": result, "target_city": target_city},
     }
 
 

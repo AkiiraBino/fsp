@@ -36,11 +36,10 @@ class FindDistanceService(CityService, RoadService):
         result = -1
         minimum = math.inf
         for city, lenght in lenght_roads.items():
-            if lenght < minimum and city not in visited_cities :
+            if lenght < minimum and city not in visited_cities:
                 minimum = lenght
                 result = city
-        
-    
+
         return result
 
     def get_link_road(self, current: int) -> dict:
@@ -60,7 +59,7 @@ class FindDistanceService(CityService, RoadService):
             else:
                 lenght_roads[city.id] = 0
                 current = city.id
-            
+
             if city.name == end_city:
                 end_id = city.id
 
@@ -73,11 +72,11 @@ class FindDistanceService(CityService, RoadService):
 
                     if lenght_roads[road["city"]] > lenght:
                         lenght_roads[road["city"]] = lenght
-                
+
             current = self.find_min(lenght_roads, visited_cities)
 
             if end_id in visited_cities:
-                return(lenght_roads[end_id])
-            
+                return lenght_roads[end_id]
+
             if current != -1:
                 visited_cities.add(current)
