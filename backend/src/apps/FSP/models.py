@@ -9,7 +9,7 @@ class City(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(unique=True)
 
-    def to_read_model(self):
+    def to_read_model(self) -> CitySchema:
         return CitySchema(id=self.id, name=self.name)
 
 
@@ -23,7 +23,7 @@ class Road(Base):
         sa.UniqueConstraint("previous_city", "next_city", name="uix_road"),
     )
 
-    def to_read_model(self):
+    def to_read_model(self) -> RoadSchema:
         return RoadSchema(
             id=self.id,
             previous_city=self.previous_city,
