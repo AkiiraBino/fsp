@@ -81,8 +81,8 @@ The base URL for all API endpoints is `/api/v1`.
     - Content Type: `application/json`
     - Schema: [FSPResponseSchema](#fsponlyschema)
   -  `404`: Not found
-    -  Content Type: `application/json`
-    -  Schema: [HTTPException]
+    - Content Type: `application/json`
+    - Schema: [HTTPException]
   - `422`: Validation Error
     - Content Type: `application/json`
     - Schema: [HTTPValidationError](#httpvalidationerror)
