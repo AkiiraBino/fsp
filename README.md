@@ -20,6 +20,23 @@ Alternatively, you can use the Makefile for a simplified command:
 make dev
 
 
+# Example
+
+## Request
+
+GET http://127.0.0.1:8080/api/v1/cities/?started_city=Factoria&target_city=Redmond
+
+## Response
+
+{
+  "city": "Factoria",
+  "result": {
+    "target_city": "Redmond",
+    "distance": 8
+  }
+}
+
+
 # FastAPI API Documentation
 
 This documentation provides information about the FastAPI API.
