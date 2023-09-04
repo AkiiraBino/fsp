@@ -12,7 +12,6 @@ You can use Docker Compose to set up and run the application along with its depe
 
 docker-compose -f docker-compose.dev.yaml up --build
 
-docker-compose -f docker-compose.prod.yaml up --build
 
 ### Option 2: Using Makefile
 
@@ -20,7 +19,6 @@ Alternatively, you can use the Makefile for a simplified command:
 
 make dev
 
-make prod
 
 # FastAPI API Documentation
 
