@@ -18,4 +18,4 @@ class SQLAlchemyRepository(AbstractRepository):
         async with async_session_maker() as session:
             query = select(self.model)
             result = await session.execute(query)
-            return result.scalars()
+            return result.all()
