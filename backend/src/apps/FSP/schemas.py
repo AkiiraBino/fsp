@@ -1,12 +1,11 @@
-from pydantic import BaseModel, Field, Json
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class CitySchema(BaseModel):
     id: int
-    name: str = Field(max_length=200)
+    name: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class RoadSchema(BaseModel):
@@ -15,8 +14,7 @@ class RoadSchema(BaseModel):
     next_city: int
     distance: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class FSPResponseSchema(BaseModel):

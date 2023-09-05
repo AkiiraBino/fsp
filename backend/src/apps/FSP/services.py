@@ -34,7 +34,6 @@ class FindDistanceService(CityService, RoadService):
         self.cities: list[CitySchema] = asyncio.run(self.get_all_city())
         self.roads: list[RoadSchema] = asyncio.run(self.get_all_road())
 
-
     def find_min(self, lenght_roads: dict, visited_cities: set) -> int:
         result = -1
         minimum = math.inf
@@ -45,7 +44,6 @@ class FindDistanceService(CityService, RoadService):
 
         return result
 
-
     def get_link_road(self, current: int) -> dict:
         for road in self.roads:
             if road.previous_city == current:
@@ -53,14 +51,12 @@ class FindDistanceService(CityService, RoadService):
             elif road.next_city == current:
                 yield {"city": road.previous_city, "distance": road.distance}
 
-
     def validation_city(self, start_city, end_city):
         name_cities = set()
         [name_cities.add(city.name) for city in self.cities]
 
         if start_city not in name_cities or end_city not in name_cities:
-            raise HTTPException(404, "start city or end city not found in")
-
+            raise HTTPException(404, "start city or end city not found")
 
     async def get_smillest_distance(self, start_city: str, end_city: str) -> int:
         self.validation_city(start_city, end_city)

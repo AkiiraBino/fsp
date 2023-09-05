@@ -17,7 +17,6 @@ async def get_distance(
         FindDistanceService, Depends(find_distance_service)
     ],
 ) -> FSPResponseSchema:
-    
     result = await find_distance_service.get_smillest_distance(
         started_city, target_city
     )
