@@ -85,6 +85,15 @@ GET http://127.0.0.1:8080/api/v1/cities/?started_city=Factoria&target_city=Redmo
   }
 }
 
+# Tests
+
+After launching the docker container
+
+docker exec backend-fsp pytest -v .
+
+test_service.py: Тесты для сервисов, включая CityService и RoadService. Проверяют корректность работы сервисов.
+
+test_router.py: Тесты для API. Выполняют HTTP-запросы и проверяют результаты.
 
 # FastAPI API Documentation
 
