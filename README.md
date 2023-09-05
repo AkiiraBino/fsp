@@ -91,9 +91,9 @@ After launching the docker container
 
 docker exec backend-fsp pytest -v .
 
-test_service.py: Тесты для сервисов, включая CityService и RoadService. Проверяют корректность работы сервисов.
+test_service.py: Tests for services, including CityService and RoadService. These tests verify the correctness of service operations.
 
-test_router.py: Тесты для API. Выполняют HTTP-запросы и проверяют результаты.
+test_router.py: Tests for the API. They perform HTTP requests and verify the results.
 
 # FastAPI API Documentation
 
