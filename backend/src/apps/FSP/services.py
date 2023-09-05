@@ -34,6 +34,7 @@ class FindDistanceService(CityService, RoadService):
         self.cities: list[CitySchema] = asyncio.run(self.get_all_city())
         self.roads: list[RoadSchema] = asyncio.run(self.get_all_road())
 
+
     def find_min(self, lenght_roads: dict, visited_cities: set) -> int:
         result = -1
         minimum = math.inf
@@ -44,12 +45,14 @@ class FindDistanceService(CityService, RoadService):
 
         return result
 
+
     def get_link_road(self, current: int) -> dict:
         for road in self.roads:
             if road.previous_city == current:
                 yield {"city": road.next_city, "distance": road.distance}
             elif road.next_city == current:
                 yield {"city": road.previous_city, "distance": road.distance}
+
 
     def validation_city(self, start_city, end_city):
         name_cities = set()
