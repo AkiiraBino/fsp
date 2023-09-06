@@ -1,6 +1,7 @@
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Union
 
+
 class CitySchema(BaseModel):
     id: int
     name: str

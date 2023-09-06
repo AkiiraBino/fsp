@@ -11,4 +11,4 @@ def road_service():
 
 
 def find_distance_service():
-    return FindDistanceService(CityRepository, RoadRepository)
+    return FindDistanceService(CityRepository, RoadRepository, CityWithRoadRepository)

@@ -7,17 +7,13 @@ from src.apps.utils import AbstractRepository
 from src.apps.FSP.schemas import CitySchema, RoadSchema
 from src.settings.db import async_session_maker
 
+
 class CityService:
     def __init__(self, city_repo: AbstractRepository):
         self.city_repo: AbstractRepository = city_repo()
 
     async def get_all_city(self) -> list:
         result = await self.city_repo.get_all()
-        result = [row[0].to_read_model() for row in result]
-        return result
-    
-    async def get_city_with_filtered(self, filters: dict) -> list:
-        result = await self.city_repo.get_with_filtered(filters)
         result = [row[0].to_read_model() for row in result]
         return result
 
@@ -33,9 +29,15 @@ class RoadService:
 
 
 class FindDistanceService(CityService, RoadService):
-    def __init__(self, city_repo: AbstractRepository, road_repo: AbstractRepository):
+    def __init__(
+        self,
+        city_repo: AbstractRepository,
+        road_repo: AbstractRepository,
+        city_road_repo: AbstractRepository,
+    ):
         self.city_repo: AbstractRepository = city_repo()
         self.road_repo: AbstractRepository = road_repo()
+        self.city_road_repo: AbstractRepository = city_road_repo()
         self.cities: list[CitySchema] = asyncio.run(self.get_all_city())
         self.roads: list[RoadSchema] = asyncio.run(self.get_all_road())
 
@@ -97,34 +99,17 @@ class FindDistanceService(CityService, RoadService):
             if current != -1:
                 visited_cities.add(current)
 
-
     async def distance_difference(self, city):
         self.validation_city(city)
-        async with async_session_maker() as session:
-            query = text(f"""
-                            WITH neighboring_cities as (SELECT 
-                            "FSP_city".name as city, 
-                            (
-                                SELECT "FSP_city".name 
-                                FROM "FSP_city"
-                                WHERE "FSP_road".next_city = "FSP_city".id
-                            ) as target_city,
-                            "FSP_road".distance as distance
-                            FROM "FSP_city" 
-                            JOIN "FSP_road" on "FSP_road".previous_city = "FSP_city".id
-                            WHERE "FSP_city".name = \'{city}\')
-                            SELECT *,
-                            ABS(LEAD(distance) OVER(PARTITION BY city ORDER BY target_city) - distance) 
-                            FROM neighboring_cities;
-                        """)
-            result = await session.execute(query)
-            result = [
-                    {
-                        "city": res[0],
-                        "target_city": res[1],
-                        "distance": res[2],
-                        "difference_with_next": res[3]
-                    } 
-                    for res in result.all()
-                ]
-            return result
+        result = await self.city_road_repo.get_deffirence(city)
+        result = [
+            {
+                "city": res[0],
+                "target_city": res[1],
+                "distance": res[2],
+                "difference_with_next": res[3]
+            } 
+            for res in result
+        ]
+
+        return result

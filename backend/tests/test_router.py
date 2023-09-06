@@ -29,22 +29,22 @@ def test_difference():
     response = client.get("/api/v1/cities/difference?city=Renton")
     assert response.status_code == 200
     assert response.json() == [
-                                {
-                                    "city": "Renton",
-                                    "target_city": "Factoria",
-                                    "distance": 8,
-                                    "difference_with_next": 4
-                                },
-                                {
-                                    "city": "Renton",
-                                    "target_city": "Issaquah",
-                                    "distance": 12,
-                                    "difference_with_next": 0
-                                },
-                                {
-                                    "city": "Renton",
-                                    "target_city": "SoDo",
-                                    "distance": 12,
-                                    "difference_with_next": None
-                                }
-                            ]
+        {
+            "city": "Renton",
+            "target_city": "Factoria",
+            "distance": 8,
+            "difference_with_next": 4,
+        },
+        {
+            "city": "Renton",
+            "target_city": "Issaquah",
+            "distance": 12,
+            "difference_with_next": 0,
+        },
+        {
+            "city": "Renton",
+            "target_city": "SoDo",
+            "distance": 12,
+            "difference_with_next": None,
+        },
+    ]
