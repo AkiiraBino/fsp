@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ConfigDict, Field
-
+from typing import Union
 
 class CitySchema(BaseModel):
     id: int
@@ -24,3 +24,10 @@ class FSPResponseSchema(BaseModel):
 
     city: str
     result: DistanceResultSchema
+
+
+class DifferenceSchema(BaseModel):
+    city: str
+    target_city: str
+    distance: int
+    difference_with_next: Union[int, None]

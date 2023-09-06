@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from typing import Annotated
 
 
-from .schemas import FSPResponseSchema, CitySchema, RoadSchema
+from .schemas import FSPResponseSchema, CitySchema, RoadSchema, DifferenceSchema
 from .services import *
 from .dependencies import *
 
@@ -25,6 +25,17 @@ async def get_distance(
         "result": {"distance": result, "target_city": target_city},
     }
 
+@router.get("/difference")
+async def get_difference(
+    city: str,
+    find_distance_service: Annotated[
+        FindDistanceService, Depends(find_distance_service)
+    ],
+) -> list[DifferenceSchema]:
+    result = await find_distance_service.distance_difference(city)
+
+    return result
+    
 
 @router.get("/city")
 async def get_all_city(
@@ -32,6 +43,8 @@ async def get_all_city(
 ) -> list[CitySchema]:
     result = await city_service.get_all_city()
     return result
+
+
 
 
 @router.get("/road")
