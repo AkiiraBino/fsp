@@ -43,9 +43,6 @@ class SQLAlcemyRepositoryWithTwoModels(AbstractRepository):
                 cities_2 = aliased(self.model_1)
                 Roads = aliased(self.model_2)
 
-                city_id = await session.execute(select(cities.id).filter(cities.name == city))
-                city_id = city_id.one()[0]
-
                 neighboring_cities = (select(
                     cities.name.label("city"),
                     cities_2.name.label("target_city"),
