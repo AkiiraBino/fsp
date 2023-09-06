@@ -53,6 +53,8 @@
 
 В CTE находятся города, связанные с исходным прямой дорогой, далее они сортируются в алфавитном порядке и попарно находится разница расстояний между ближайшими двумя городами при помощи LEAD и OVER. Последний город не имеет следующей пары, поэтому имеет значение Null в соответствующем стобце
 
+Реализация в backend/src/apps/services
+
 # Running the Application
 
 This section provides instructions for running the FastAPI application in different modes.
